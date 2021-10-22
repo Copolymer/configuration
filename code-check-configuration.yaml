@@ -1,0 +1,47 @@
+prepares:
+  - git status > ~/temp-status.log
+scheme: SogouInput
+workspace: SogouInput.xcworkspace
+exclude:
+  - Pods
+  - TRSogouRecorder
+  - SkinEncrypt
+oclint:
+    disable-rules:
+      - BitwiseOperatorInConditional
+      - UnnecessaryDefaultStatement
+      - AssignIvarOutsideAccessors
+      - ReplaceWithBoxedExpression
+      - ReplaceWithContainerLiteral
+      - ReplaceWithNumberLiteral
+      - ReplaceWithObjectSubscripting
+      - UnnecessaryElseStatement
+      - HighCyclomaticComplexity
+      - HighNcssMethod
+      - LongClass
+      - LongLine
+      - LongMethod
+      - DeepNestedBlock
+      - HighNPathComplexity
+      - TooManyFields
+      - TooManyMethods
+      - CollapsibleIfStatements
+      - PreferEarlyExit
+      - TooFewBranchesInSwitchStatement
+      - RedundantIfStatement
+      - RedundantNilCheck
+      - UnusedMethodParameter
+      - UselessParentheses
+    rule-configurations:
+      - key: LONG_VARIABLE_NAME
+        value: 30
+      - key: LONG_LINE
+        value: 150
+      - key: MAXIMUM_IF_LENGTH
+        value: 30
+      - key: AMEND_CYCLOMATIC_COMPLEXITY
+        value: 30
+    enable-clang-static-analyzer: true
+pmd:
+    minimum-tokens: 400
+infer:

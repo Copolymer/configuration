@@ -1,0 +1,62 @@
+prepares: # [数组-脚本]预处理脚本，在单测执行前执行
+  - eval $(which python3) UpdateTestSetting.py
+  - rm -rf /tmp/SogouInput
+  - git status > /Users/builder/temp-status-ut.log
+tests:    # [数组]单测配置
+  -
+    scheme: SogouInputTests # [xcodebuild -scheme]单测scheme
+    workspace: SogouInput.xcworkspace # [xcodebuild -workspace or xcodebuild -project]单测workspace或project
+    configuration: UnitTest # [xcodebuild -configuration]单测配置
+    skipTestings: # [xcodebuild -skip-testing]跳过的单测case
+      -
+        testTarget: SogouInputTests
+        testClass: SGKVStoreGroupKeyboardNoFullAccessTests
+      -
+        testTarget: SogouInputTests
+        testClass: SGKVStoreGroupKeyboardTests
+      - 
+        testTarget: SogouInputTests
+        testClass: SGKVStoreGroupCommonTests
+      - 
+        testTarget: SogouInputTests
+        testClass: SGKVStoreTests
+      -
+        testTarget: SogouInputTests
+        testClass: SGIHttpResponseParserTests
+      -
+        testTarget: SogouInputTests
+        testClass: SGDBStoreThreadTest
+      -
+        testTarget: SogouInputTests
+        testClass: SGDownloadableLanguagesViewModelTests
+        testMethod: testThatCancelLoadingMakesGetRemoteLanguageBlockNotCalled
+    targets: # [Product名]单测的对象
+      - SogouInput
+    enableParallelTesting: false # [bool]允许并行测试
+    maxConcurrentTestSimulatorDestinations: 1 # [int]最大并行模拟器数量
+    testingWorkerCount: 1 # [int]单测执行器数量
+  -
+    scheme: BaseKeyboardFrameworkTests
+    workspace: SogouInput.xcworkspace
+    configuration: UnitTest
+    targets:
+      - com.sogou.sogouinput.BaseKeyboard
+    enableParallelTesting: false
+    maxConcurrentTestSimulatorDestinations: 1
+    testingWorkerCount: 1
+coveragePods: # [数组]需要合并计算单测覆盖率的外仓
+  -
+    podName: SGBaseKit # 仓工程名
+  -
+    podName: SGInputBaseKit # 仓工程名
+    podSpecs:   # [数组]仓工程包含的仓spec名
+      - SGInputKeyboardBaseKit
+      - SGInputAppBaseKit
+  -
+    podName: SGIProjectConfig
+  -
+    podName: SGKVStore
+simulators:
+  -
+    machineType: iPhone 12
+    numbers: 1
