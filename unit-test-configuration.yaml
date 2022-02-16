@@ -44,6 +44,15 @@ tests:    # [数组]单测配置
     enableParallelTesting: false
     maxConcurrentTestSimulatorDestinations: 1
     testingWorkerCount: 1
+  -
+    scheme: SGInputManagerTests
+    project: SGInputManager/SGInputManager.xcodeproj
+    configuration: UnitTest
+    targets:
+      - SGInputManager
+    enableParallelTesting: false
+    maxConcurrentTestSimulatorDestinations: 1
+    testingWorkerCount: 1
 coveragePods: # [数组]需要合并计算单测覆盖率的外仓
   -
     podName: SGBaseKit # 仓工程名
