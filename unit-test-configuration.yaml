@@ -4,6 +4,15 @@ prepares: # [数组-脚本]预处理脚本，在单测执行前执行
   - git status > /Users/builder/temp-status-ut.log
 tests:    # [数组]单测配置
   -
+    scheme: SGInputManagerTests
+    project: SGInputManager/SGInputManager.xcodeproj
+    configuration: UnitTest
+    targets:
+      - SGInputManager
+    enableParallelTesting: false
+    maxConcurrentTestSimulatorDestinations: 1
+    testingWorkerCount: 1
+  -
     scheme: SogouInputTests # [xcodebuild -scheme]单测scheme
     workspace: SogouInput.xcworkspace # [xcodebuild -workspace or xcodebuild -project]单测workspace或project
     configuration: UnitTest # [xcodebuild -configuration]单测配置
@@ -41,15 +50,6 @@ tests:    # [数组]单测配置
     configuration: UnitTest
     targets:
       - com.sogou.sogouinput.BaseKeyboard
-    enableParallelTesting: false
-    maxConcurrentTestSimulatorDestinations: 1
-    testingWorkerCount: 1
-  -
-    scheme: SGInputManagerTests
-    project: SGInputManager/SGInputManager.xcodeproj
-    configuration: UnitTest
-    targets:
-      - SGInputManager
     enableParallelTesting: false
     maxConcurrentTestSimulatorDestinations: 1
     testingWorkerCount: 1
